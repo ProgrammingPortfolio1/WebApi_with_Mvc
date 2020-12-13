@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ViewPostsId";
+}
+
+<h4>Post Details</h4>
+
+@section scripts    {
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            $(document).ready(function () {
+
+                var str = window.location.href;
+
+                var strid = str.substr(str.lastIndexOf("/") + 1, str.length);
+
+                //$.get('/api/Posts/' + strid, function (data) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/Posts/' + strid,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        $('#result1').empty();
+
+                        //$('#result1').html('<h3>' + '<font color="blue">' + data.title + '</font>' + '</h3>' + '<h4>' + '<font color="red">' + data.body + '</font>' + '</h4>');
+
+                        $('#result1').html($('#result1').html() + '<h3>' + '<font color="blue">' + data.title + '</font>' + '</h3>');
+
+                        $('#result1').html($('#result1').html() + '<h4>' + '<font color="red">' + data.body + '</font>' + '</h4>');
+
+                        //}, 'json');
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
+<div id="result1"></div>

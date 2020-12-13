@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ViewPosts";
+}
+
+<h4>Posts</h4>
+
+@section scripts    {
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            $(document).ready(function () {
+
+                @*var url1 = '@Url.Action("ViewPostsId", "Home")?id=' ;*@
+
+                //var url2 = '/Home/ViewPostsId?id=';
+
+                var url3 = '/Home/ViewPostsId/';
+
+                //$.get('/api/Posts', function (data) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/Posts',
+                    dataType: 'json',
+                    success: function (data) {
+
+                        $('#result2').empty();
+                        $.each(data, function (i, v) {
+
+                            $('#result2').html($('#result2').html() + '<a style="text-decoration: none" href="' + url3 + v.id + '">' + '<h3>' + v.title + '</h3>' + '</a>');
+
+                        });
+                        //}, 'json');
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
+<div id="result2"></div>

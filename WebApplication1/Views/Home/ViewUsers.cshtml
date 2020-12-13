@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ViewUsers";
+}
+
+<h4>Users</h4>
+
+@section scripts    {
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            $(document).ready(function () {
+
+                @*var url1 = '@Url.Action("ViewUsersId", "Home")?id=' ;*@
+
+                //var url2 = '/Home/ViewUsersId?id=';
+
+                var url3 = '/Home/ViewUsersId/';
+
+                //$.get('/api/Users', function (data) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/Users',
+                    dataType: 'json',
+                    success: function (data) {
+
+                        $('#result7').empty();
+                        $.each(data, function (i, v) {
+
+                            $('#result7').html($('#result7').html() + '<a style="text-decoration: none" href="' + url3 + v.id + '">' + '<h3>' + v.name + '</h3>' + '</a>');
+
+                        });
+                        //}, 'json');
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
+<div id="result7"></div>
